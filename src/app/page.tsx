@@ -6,8 +6,8 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <div className="container flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center">
-      <div className="mx-auto max-w-2xl text-center">
+    <div className="flex min-h-screen w-full items-center justify-center px-4">
+      <div className="mx-auto w-full max-w-2xl text-center">
         <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">
           🚀 Hackathon Starter
         </h1>
@@ -16,7 +16,7 @@ export default async function Home() {
           <br />
           해커톤에서 바로 사용할 수 있도록 모든 기본 기능이 준비되어 있습니다.
         </p>
-        
+
         <div className="mt-10 flex items-center justify-center gap-4">
           {session ? (
             <Link href="/dashboard">

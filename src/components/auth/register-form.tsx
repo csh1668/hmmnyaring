@@ -6,17 +6,19 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import { useTRPC } from '@/lib/trpc/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { trpc } from '@/lib/trpc/client';
 
 export function RegisterForm() {
+  const trpc = useTRPC();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const registerMutation = trpc.user.register.useMutation();
+  const registerMutation = useMutation(trpc.user.register.mutationOptions());
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

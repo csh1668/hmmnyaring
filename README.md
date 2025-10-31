@@ -1,6 +1,6 @@
 # 🚀 Hackathon Starter
 
-**12시간 해커톤을 위한 풀스택 보일러플레이트**
+**풀스택 보일러플레이트**
 
 Next.js 15 + tRPC + Prisma + NextAuth + TypeScript로 구축된 프로덕션 레디 템플릿입니다.
 
@@ -17,7 +17,7 @@ Next.js 15 + tRPC + Prisma + NextAuth + TypeScript로 구축된 프로덕션 레
 - 🎨 **Tailwind CSS v4** - 유틸리티 기반 스타일링
 - 🧩 **shadcn/ui** - 아름다운 UI 컴포넌트
 - 📝 **Zod** - 런타임 타입 검증
-- 🔥 **React Query** - 서버 상태 관리
+- 🔥 **Tanstack React Query** - 서버 상태 관리
 - 📦 **pnpm** - 빠른 패키지 매니저
 
 ---
@@ -35,8 +35,8 @@ Next.js 15 + tRPC + Prisma + NextAuth + TypeScript로 구축된 프로덕션 레
 ### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/your-username/hackathon-starter.git
-cd hackathon-starter
+git clone https://github.com/csh1668/nextjs-trpc-prisma-boilerplate
+cd nextjs-trpc-prisma-boilerplate
 ```
 
 ### 2. 패키지 설치
@@ -364,8 +364,8 @@ MIT License - 자유롭게 사용하세요!
 
 ## 💬 문의 및 지원
 
-- Issues: [GitHub Issues](https://github.com/your-username/hackathon-starter/issues)
-- Discussions: [GitHub Discussions](https://github.com/your-username/hackathon-starter/discussions)
+- Issues: [GitHub Issues](https://github.com/csh1668/nextjs-trpc-prisma-boilerplate/issues)
+- Discussions: [GitHub Discussions](https://github.com/csh1668/nextjs-trpc-prisma-boilerplate/discussions)
 
 ---
 
@@ -380,7 +380,3 @@ MIT License - 자유롭게 사용하세요!
 - [shadcn/ui](https://ui.shadcn.com/)
 
 ---
-
-**해커톤에서 빠르게 프로토타입을 만들고 싶다면, 이 템플릿으로 시작하세요! 🚀**
-
-Made with ❤️ for Hackathons

@@ -1,7 +1,7 @@
 # Cursor AI Rules for Hackathon Starter
 
 ## 프로젝트 컨텍스트
-이 프로젝트는 Next.js 15 + tRPC + Prisma + NextAuth를 사용하는 해커톤 보일러플레이트입니다.
+이 프로젝트는 Next.js 15 + tRPC + Prisma + NextAuth를 사용하는 보일러플레이트입니다.
 
 ## 코딩 스타일
 
@@ -42,7 +42,7 @@
 1. `src/server/routers/[name].ts` 파일 생성
 2. `createTRPCRouter`로 라우터 정의
 3. `_app.ts`에 등록
-4. 클라이언트에서 `trpc.[name].[procedure]` 사용
+4. 클라이언트에서 `const trpc = useTRPC(), const { data, isLoading, error } = useQuery(trpc.[name].[procedure].queryOptions())` 사용
 
 ### 새 Prisma 모델 추가 시
 1. `schema.prisma`에 모델 정의

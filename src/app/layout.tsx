@@ -32,7 +32,7 @@ export default function RootLayout({
       >
         <TRPCProvider>
           <Header />
-          <main className="min-h-screen">{children}</main>
+          {children}
           <Toaster />
         </TRPCProvider>
       </body>
