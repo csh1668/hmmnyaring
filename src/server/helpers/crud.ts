@@ -21,7 +21,7 @@ export async function ensureOwnership(
   id: string,
   userId: string
 ) {
-  const record = await (ctx.prisma[modelName] as any).findUnique({
+  const record = await (ctx.prisma[modelName] as unknown as any).findUnique({
     where: { id },
     select: { authorId: true, id: true },
   });

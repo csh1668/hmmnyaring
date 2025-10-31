@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { PostSkeleton } from './post-skeleton';
 import { toast } from 'sonner';
 
 export function PostList() {
@@ -110,7 +111,11 @@ export function PostList() {
   };
 
   if (isLoading) {
-    return <div className="text-center py-8">로딩 중...</div>;
+    return (
+      <div className="space-y-4">
+        <PostSkeleton count={3} />
+      </div>
+    );
   }
 
   return (
