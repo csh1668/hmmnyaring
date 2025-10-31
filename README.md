@@ -10,14 +10,18 @@ Next.js 15 + tRPC + Prisma + NextAuth + TypeScript로 구축된 프로덕션 레
 
 ## ✨ 주요 기능
 
+### 핵심 스택
 - ⚡ **Next.js 15** - App Router, React Server Components
 - 🔐 **NextAuth v5** - 즉시 사용 가능한 인증 시스템
-- 🛡️ **tRPC** - 타입 안전한 API (End-to-End Type Safety)
+- 🛡️ **tRPC v11** - 타입 안전한 API (TanStack React Query Integration)
 - 💾 **Prisma ORM** - PostgreSQL과 완벽한 TypeScript 통합
 - 🎨 **Tailwind CSS v4** - 유틸리티 기반 스타일링
 - 🧩 **shadcn/ui** - 아름다운 UI 컴포넌트
-- 📝 **Zod** - 런타임 타입 검증
-- 🔥 **Tanstack React Query** - 서버 상태 관리
+
+### 개발 경험 (DX)
+- 📝 **Zod** - 런타임 타입 검증 + 환경변수 검증
+- 🔥 **React Query Devtools** - API 디버깅 도구
+- 🎯 **타입 안전성** - End-to-End Type Safety
 - 📦 **pnpm** - 빠른 패키지 매니저
 
 ---
@@ -316,9 +320,11 @@ pnpm dlx shadcn@latest add table
 
 ## 📖 추가 문서
 
+- [🛠️ 개발 가이드](./DEVELOPMENT_GUIDE.md) - **필독!** 개발 플로우, 수칙, 팁
 - [📘 설정 가이드](./SETUP.md) - 상세한 설정 방법
 - [💡 예제 코드](./EXAMPLES.md) - 자주 사용하는 패턴
 - [✅ 해커톤 체크리스트](./HACKATHON_CHECKLIST.md) - 해커톤 진행 가이드
+- [🔐 환경변수 설정](./ENV_SETUP.md) - 환경변수 상세 가이드
 
 ---
 
