@@ -11,10 +11,10 @@ Next.js 15 + tRPC + Prisma + NextAuth + TypeScript로 구축된 프로덕션 레
 ## ✨ 주요 기능
 
 ### 핵심 스택
-- ⚡ **Next.js 15** - App Router, React Server Components
+- ⚡ **Next.js 16** - App Router, React Server Components
 - 🔐 **NextAuth v5** - 즉시 사용 가능한 인증 시스템
 - 🛡️ **tRPC v11** - 타입 안전한 API (TanStack React Query Integration)
-- 💾 **Prisma ORM** - PostgreSQL과 완벽한 TypeScript 통합
+- 💾 **Prisma ORM 6.19** - PostgreSQL과 완벽한 TypeScript 통합
 - 🎨 **Tailwind CSS v4** - 유틸리티 기반 스타일링
 - 🧩 **shadcn/ui** - 아름다운 UI 컴포넌트
 
@@ -63,6 +63,8 @@ NEXTAUTH_URL="http://localhost:3000"
 
 # App URL
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+
 ```
 
 ### 4. 데이터베이스 설정
@@ -331,10 +333,10 @@ pnpm dlx shadcn@latest add table
 ## 🧰 기술 스택
 
 ### 코어
-- [Next.js 15](https://nextjs.org/) - React 프레임워크
-- [TypeScript](https://www.typescriptlang.org/) - 타입 안전성
-- [tRPC](https://trpc.io/) - End-to-End 타입 안전 API
-- [Prisma](https://www.prisma.io/) - ORM
+- [Next.js 16](https://nextjs.org/) - React 프레임워크
+- [TypeScript 5.9](https://www.typescriptlang.org/) - 타입 안전성
+- [tRPC 11](https://trpc.io/) - End-to-End 타입 안전 API
+- [Prisma 6.19](https://www.prisma.io/) - ORM
 
 ### 인증
 - [NextAuth.js v5](https://authjs.dev/) - 인증 솔루션
@@ -345,8 +347,8 @@ pnpm dlx shadcn@latest add table
 - [Radix UI](https://www.radix-ui.com/) - Headless 컴포넌트
 
 ### 검증 & 상태관리
-- [Zod](https://zod.dev/) - 스키마 검증
-- [React Query](https://tanstack.com/query) - 서버 상태 관리
+- [Zod 4](https://zod.dev/) - 스키마 검증
+- [TanStack Query 5](https://tanstack.com/query) - 서버 상태 관리
 
 ---
 
