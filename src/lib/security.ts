@@ -5,6 +5,7 @@
  */
 
 import { z } from 'zod';
+import DOMPurify from 'dompurify';
 
 /**
  * SSRF 방어: 안전한 URL인지 검증
@@ -161,10 +162,8 @@ export function validateTranslationInput(text: string): {
  * HTML 태그 제거 (XSS 방어)
  */
 export function sanitizeHtml(text: string): string {
-  return text
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    .replace(/<[^>]*>/g, '')
-    .trim();
+  // DOMPurify.sanitize는 안전한 HTML 문자열을 반환합니다.
+  return DOMPurify.sanitize(text);
 }
 
 /**
