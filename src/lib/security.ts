@@ -163,7 +163,7 @@ export function validateTranslationInput(text: string): {
  */
 export function sanitizeHtml(text: string): string {
   // DOMPurify.sanitize는 안전한 HTML 문자열을 반환합니다.
-  return DOMPurify.sanitize(text);
+  return DOMPurify.sanitize(text, { ALLOWED_TAGS: [] });
 }
 
 /**
