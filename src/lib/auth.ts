@@ -39,27 +39,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  // 🔒 보안: 명시적 쿠키 설정
-  cookies: {
-    sessionToken: {
-      name: '__Secure-next-auth.session-token',
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: serverEnv.NODE_ENV === 'production',
-      },
-    },
-    csrfToken: {
-      name: '__Host-next-auth.csrf-token',
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: serverEnv.NODE_ENV === 'production',
-      },
-    },
-  },
   providers: [
     GoogleProvider({
       clientId: serverEnv.GOOGLE_CLIENT_ID,
@@ -85,21 +64,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         const { email, password } = parsedCredentials.data;
-
-        // 🔒 보안: 로그인 Rate Limiting (5분당 5회)
-        const { loginRateLimit, checkRateLimit } = await import('@/lib/simple-rate-limit');
-        const rateLimitResult = await checkRateLimit(
-          loginRateLimit,
-          email.toLowerCase()
-        );
-
-        if (!rateLimitResult.success) {
-          console.warn('[Auth] Login rate limit exceeded:', {
-            email: email.toLowerCase(),
-            timestamp: new Date().toISOString(),
-          });
-          return null; // 브루트포스 시도로 간주
-        }
 
         // 유저 조회
         const user = await prisma.user.findUnique({

@@ -240,3 +240,4 @@ import { useRouter, usePathname } from '@/i18n/routing';
 - `'use client'` 지시어 추가 확인
 - `getTranslations` 대신 `useTranslations` 사용 확인
 
+
