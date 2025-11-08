@@ -4,15 +4,20 @@
  * - locale 처리 (ko/en)
  * - 인증 체크
  * - 프로필 체크
+ * 
+ * Edge Runtime 최적화: 경량 설정 사용 (Prisma 제외)
  */
 
-import { auth } from '@/lib/auth';
+import NextAuth from 'next-auth';
+import { authConfig } from '@/lib/auth.config';
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 
 // next-intl 미들웨어 생성
 const intlMiddleware = createMiddleware(routing);
+
+const { auth } = NextAuth(authConfig);
 
 export default auth(async (req) => {
   const session = req.auth;

@@ -13,6 +13,7 @@ import { prisma } from '@/server/db';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import { serverEnv } from '@/env/server';
+import { authConfig } from './auth.config';
 
 // NextAuth 타입 확장
 declare module 'next-auth' {
@@ -32,6 +33,7 @@ declare module 'next-auth' {
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
@@ -57,10 +59,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         secure: serverEnv.NODE_ENV === 'production',
       },
     },
-  },
-  pages: {
-    signIn: '/login',
-    error: '/login',
   },
   providers: [
     GoogleProvider({
