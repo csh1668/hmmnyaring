@@ -39,8 +39,8 @@ Next.js 15 + tRPC + Prisma + NextAuth + TypeScript로 구축된 프로덕션 레
 ### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/csh1668/nextjs-trpc-prisma-boilerplate
-cd nextjs-trpc-prisma-boilerplate
+git clone https://github.com/csh1668/hmmnyaring
+cd hmmnyaring
 ```
 
 ### 2. 패키지 설치
@@ -372,8 +372,8 @@ MIT License - 자유롭게 사용하세요!
 
 ## 💬 문의 및 지원
 
-- Issues: [GitHub Issues](https://github.com/csh1668/nextjs-trpc-prisma-boilerplate/issues)
-- Discussions: [GitHub Discussions](https://github.com/csh1668/nextjs-trpc-prisma-boilerplate/discussions)
+- Issues: [GitHub Issues](https://github.com/csh1668/hmmnyaring/issues)
+- Discussions: [GitHub Discussions](https://github.com/csh1668/hmmnyaring/discussions)
 
 ---
 
