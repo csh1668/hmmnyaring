@@ -65,6 +65,12 @@ model User {
   sentReviews      Review[]      @relation("ReviewAuthor")
   receivedReviews  Review[]      @relation("ReviewReceiver")
 
+  // 코스 관계
+  createdCourses   TourCourse[]        @relation("CourseAuthor")
+  likedCourses     TourCourseLike[]
+  savedCourses     SavedTourCourse[]
+  visitedSpots     VisitedTourSpot[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -112,6 +118,12 @@ enum TourRequestStatus {
   REJECTED // 거절됨
   COMPLETED // 완료됨
   CANCELLED // 취소됨
+}
+
+enum CourseDifficulty {
+  EASY // 쉬움
+  MODERATE // 보통
+  HARD // 어려움
 }
 
 // TravelMate Daejeon Models
@@ -273,4 +285,122 @@ model TourLocation {
   updatedAt DateTime @updatedAt
 
   @@index([category])
+}
+
+// 추천 여행 코스
+model TourCourse {
+  id          String            @id @default(cuid())
+  title       String
+  description String            @db.Text
+  category    TourCategory
+  difficulty  CourseDifficulty  @default(MODERATE)
+  
+  // 예상 소요시간 (분 단위)
+  estimatedDuration Int
+  
+  // 작성자 (가이드)
+  authorId String
+  author   User   @relation("CourseAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  
+  // 장소들
+  spots TourSpot[]
+  
+  // 통계
+  viewCount Int @default(0)
+  likeCount Int @default(0)
+  saveCount Int @default(0)
+  
+  // 관계
+  likes TourCourseLike[]
+  saves SavedTourCourse[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([authorId])
+  @@index([category])
+  @@index([difficulty])
+  @@index([createdAt])
+}
+
+// 코스 내 장소
+model TourSpot {
+  id          String     @id @default(cuid())
+  order       Int        // 순서
+  name        String
+  description String     @db.Text
+  
+  // 위치 정보
+  latitude    Float
+  longitude   Float
+  address     String
+  placeId     String? // Kakao Place ID
+  
+  // 이미지
+  imageUrl String?
+  
+  // 소속 코스
+  courseId String
+  course   TourCourse @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  // 방문 기록
+  visits VisitedTourSpot[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([courseId])
+  @@index([order])
+}
+
+// 코스 좋아요
+model TourCourseLike {
+  id       String @id @default(cuid())
+  
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  courseId String
+  course   TourCourse @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+}
+
+// 저장한 코스
+model SavedTourCourse {
+  id       String @id @default(cuid())
+  
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  courseId String
+  course   TourCourse @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+}
+
+// 방문한 장소
+model VisitedTourSpot {
+  id        String   @id @default(cuid())
+  visitDate DateTime @default(now())
+  
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  spotId String
+  spot   TourSpot @relation(fields: [spotId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([userId, spotId])
+  @@index([userId])
+  @@index([spotId])
 }

@@ -13,6 +13,7 @@ import { tourRequestRouter } from './tour-request';
 import { chatRouter } from './chat';
 import { reviewRouter } from './review';
 import { translationRouter } from './translation';
+import { tourCourseRouter } from './tour-course';
 
 export const appRouter = createTRPCRouter({
   user: userRouter,
@@ -23,6 +24,7 @@ export const appRouter = createTRPCRouter({
   chat: chatRouter,
   review: reviewRouter,
   translation: translationRouter,
+  tourCourse: tourCourseRouter,
 });
 
 // tRPC 타입 export (클라이언트에서 사용)

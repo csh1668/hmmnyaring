@@ -17,11 +17,11 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://dapi.kakao.com https://t1.kakaocdn.net",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://dapi.kakao.com https://t1.kakaocdn.net https://t1.daumcdn.net",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://dapi.kakao.com https://generativelanguage.googleapis.com",
+              "connect-src 'self' https://dapi.kakao.com https://generativelanguage.googleapis.com https://*.ingest.uploadthing.com https://uploadthing.com https://utfs.io",
               "frame-src 'none'",
               "object-src 'none'",
               "base-uri 'self'",

@@ -8,7 +8,7 @@ import { prisma } from '@/server/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Star, MapPin, MessageSquare, Clock } from 'lucide-react';
+import { Star, MapPin, MessageSquare, Clock, Route } from 'lucide-react';
 import { format } from 'date-fns';
 import { TourRequestActions } from '@/components/tour/tour-request-actions';
 import { TourCompleteButton } from '@/components/tour/tour-complete-button';
@@ -140,6 +140,25 @@ export default async function GuideDashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* 내 코스 관리 */}
+      <Card className="border-dashed">
+        <CardContent className="flex flex-col items-center justify-center py-8">
+          <Route className="mb-4 h-12 w-12 text-muted-foreground" />
+          <h3 className="mb-2 text-lg font-semibold">{tCommon('manageCourses')}</h3>
+          <p className="mb-4 text-sm text-muted-foreground text-center">
+            {tCommon('manageCoursesDesc')}
+          </p>
+          <div className="flex gap-2">
+            <Button size="lg" asChild>
+              <Link href="/dashboard/guide/courses">{tCommon('myCourses')}</Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/courses">{tCommon('allCourses')}</Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* 투어 요청 리스트 */}
       <Card>

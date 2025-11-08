@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { auth } from '@/lib/auth';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Shield, MessageSquare, Sparkles, Users, Globe, Star, Compass, Heart, Zap } from 'lucide-react';
+import { MapPin, Shield, MessageSquare, Sparkles, Users, Globe, Star, Compass, Heart, Zap, Route } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 
@@ -50,6 +50,12 @@ export default async function Home() {
                   <Link href="/dashboard">
                     <Compass className="mr-2 h-6 w-6" />
                     {t('ctaDashboard')}
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto h-14 px-8 text-lg glass border-2">
+                  <Link href="/courses">
+                    <Route className="mr-2 h-6 w-6" />
+                    {t('ctaCourses')}
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild className="w-full sm:w-auto h-14 px-8 text-lg glass border-2">
@@ -172,6 +178,17 @@ export default async function Home() {
             {t('ctaSubtitle')}
           </p>
           <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button
+              size="lg"
+              variant="secondary"
+              asChild
+              className="w-full sm:w-auto h-14 px-10 text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all font-semibold"
+            >
+              <Link href="/courses">
+                <Route className="mr-2 h-6 w-6" />
+                {t('ctaCourses')}
+              </Link>
+            </Button>
             <Button
               size="lg"
               variant="secondary"

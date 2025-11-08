@@ -8,7 +8,7 @@ import { prisma } from '@/server/db';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Search, MessageSquare, Clock, CheckCircle } from 'lucide-react';
+import { Search, MessageSquare, Clock, CheckCircle, Route, Bookmark, MapPin as MapPinIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Link } from '@/i18n/routing';
@@ -145,19 +145,52 @@ export default async function TravelerDashboardPage() {
         </Card>
       </div>
 
-      {/* 가이드 찾기 버튼 */}
-      <Card className="border-dashed">
-        <CardContent className="flex flex-col items-center justify-center py-8">
-          <Search className="mb-4 h-12 w-12 text-muted-foreground" />
-          <h3 className="mb-2 text-lg font-semibold">{t('findGuide')}</h3>
-          <p className="mb-4 text-sm text-muted-foreground">
-            {t('findGuideDesc')}
-          </p>
-          <Button size="lg" asChild>
-            <Link href="/guides">{t('findGuideButton')}</Link>
-          </Button>
-        </CardContent>
-      </Card>
+      {/* 빠른 액션 */}
+      <div className="grid gap-4 md:grid-cols-3">
+        <Card className="border-dashed">
+          <CardContent className="flex flex-col items-center justify-center py-6">
+            <Search className="mb-3 h-10 w-10 text-muted-foreground" />
+            <h3 className="mb-1 text-base font-semibold">{t('findGuide')}</h3>
+            <p className="mb-3 text-xs text-muted-foreground text-center">
+              {t('findGuideDesc')}
+            </p>
+            <Button size="sm" asChild>
+              <Link href="/guides">{t('findGuideButton')}</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="border-dashed">
+          <CardContent className="flex flex-col items-center justify-center py-6">
+            <Route className="mb-3 h-10 w-10 text-muted-foreground" />
+            <h3 className="mb-1 text-base font-semibold">{tCommon('recommendedCourses')}</h3>
+            <p className="mb-3 text-xs text-muted-foreground text-center">
+              {tCommon('recommendedCoursesDesc')}
+            </p>
+            <Button size="sm" asChild>
+              <Link href="/courses">{tCommon('exploreCourses')}</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="border-dashed">
+          <CardContent className="flex flex-col items-center justify-center py-6">
+            <Bookmark className="mb-3 h-10 w-10 text-muted-foreground" />
+            <h3 className="mb-1 text-base font-semibold">{tCommon('myTravel')}</h3>
+            <p className="mb-3 text-xs text-muted-foreground text-center">
+              {tCommon('myTravelDesc')}
+            </p>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline" asChild>
+                <Link href="/dashboard/traveler/saved-courses">{tCommon('saved')}</Link>
+              </Button>
+              <Button size="sm" variant="outline" asChild>
+                <Link href="/dashboard/traveler/visited-spots">{tCommon('visited')}</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* 투어 요청 리스트 */}
       <Card>

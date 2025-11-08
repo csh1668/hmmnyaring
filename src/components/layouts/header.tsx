@@ -6,7 +6,7 @@
 import { auth } from '@/lib/auth';
 import { UserMenu } from '@/components/auth/user-menu';
 import { Button } from '@/components/ui/button';
-import { Compass, Map, Users } from 'lucide-react';
+import { Compass, Map, Users, MapPin } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { LanguageSwitcher } from '@/components/ui/language-switcher';
 import { getTranslations } from 'next-intl/server';
@@ -41,6 +41,13 @@ export async function Header() {
                 <span>{t('guides')}</span>
               </Link>
               <Link
+                href="/courses"
+                className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              >
+                <MapPin className="h-4 w-4" />
+                <span>코스</span>
+              </Link>
+              <Link
                 href="/dashboard"
                 className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
               >
@@ -52,6 +59,13 @@ export async function Header() {
             </>
           ) : (
             <>
+              <Link
+                href="/courses"
+                className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              >
+                <MapPin className="h-4 w-4" />
+                <span>{t('courses')}</span>
+              </Link>
               <LanguageSwitcher />
               <Link href="/login">
                 <Button variant="ghost" size="sm" className="hover:bg-primary/10 hover:text-primary">

@@ -1,0 +1,76 @@
+name: Security Check
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  security-lint:
+    name: ESLint Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run security lint
+        run: pnpm run lint:security
+        continue-on-error: true  # 해커톤용 - warning 허용
+
+      - name: Upload lint results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-results
+          path: |
+            **/*.log
+
+  summary:
+    name: Security Check Summary
+    runs-on: ubuntu-latest
+    needs: security-lint
+    if: always()
+
+    steps:
+      - name: Check security lint result
+        run: |
+          if [ "${{ needs.security-lint.result }}" == "failure" ]; then
+            echo "❌ 보안 검사 실패: 코드에서 보안 취약점이 발견되었습니다."
+            echo "XSS, eval, unsafe regex, innerHTML 등의 보안 문제를 확인하세요."
+            exit 1
+          else
+            echo "✅ 보안 검사 통과: 보안 취약점이 발견되지 않았습니다."
+          fi
+

@@ -39,20 +39,37 @@ export function PlaceSearch({
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
 
   useEffect(() => {
-    loadKakaoMapScript().then(() => {
-      setIsSDKLoaded(true);
-    });
+    loadKakaoMapScript()
+      .then(() => {
+        // Places 서비스가 로드될 때까지 대기
+        const checkPlaces = () => {
+          if (window.kakao?.maps?.services?.Places) {
+            setIsSDKLoaded(true);
+          } else {
+            setTimeout(checkPlaces, 100);
+          }
+        };
+        checkPlaces();
+      })
+      .catch((error) => {
+        console.error('Kakao Maps SDK 로드 실패:', error);
+      });
   }, []);
 
-  const handleSearch = async (e?: React.FormEvent) => {
-    e?.preventDefault();
-
+  const handleSearch = async () => {
     if (!keyword.trim()) return;
-    if (!isSDKLoaded || !window.kakao) return;
+    if (!isSDKLoaded || !window.kakao?.maps?.services) return;
 
     setIsSearching(true);
 
     try {
+      // Kakao Maps SDK가 완전히 로드되었는지 확인
+      if (!window.kakao?.maps?.services?.Places) {
+        console.error('Kakao Maps Places 서비스를 사용할 수 없습니다.');
+        setIsSearching(false);
+        return;
+      }
+
       const ps = new window.kakao.maps.services.Places();
 
       ps.keywordSearch(keyword, (data: any, status: any) => {
@@ -74,6 +91,13 @@ export function PlaceSearch({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSearch();
+    }
+  };
+
   const handleSelectPlace = (place: PlaceSearchResult) => {
     onSelect(place);
     setKeyword('');
@@ -82,16 +106,18 @@ export function PlaceSearch({
 
   return (
     <div className="space-y-3">
-      <form onSubmit={handleSearch} className="flex gap-2">
+      <div className="flex gap-2">
         <Input
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
           autoFocus={autoFocus}
           disabled={!isSDKLoaded || isSearching}
         />
         <Button
-          type="submit"
+          type="button"
+          onClick={handleSearch}
           disabled={!keyword.trim() || !isSDKLoaded || isSearching}
         >
           {isSearching ? (
@@ -100,7 +126,7 @@ export function PlaceSearch({
             <Search className="h-4 w-4" />
           )}
         </Button>
-      </form>
+      </div>
 
       {results.length > 0 && (
         <ScrollArea className="h-[300px] rounded-md border">

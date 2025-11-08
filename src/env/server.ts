@@ -23,6 +23,10 @@ const serverSchema = z.object({
   // Gemini API
   GEMINI_API_KEY: z.string().min(1, 'GEMINI_API_KEY is required'),
 
+  // Uploadthing (이미지 업로드)
+  UPLOADTHING_SECRET: z.string().optional(),
+  UPLOADTHING_APP_ID: z.string().optional(),
+
   // Node Environment
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
 
