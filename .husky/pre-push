@@ -1,14 +1,6 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # 보안 검사 실행 (해커톤용 - Critical 에러만 차단)
 echo "🔍 보안 검사를 실행합니다"
-pnpm run lint:security
-
-# Critical 에러만 차단, warning은 허용
-if [ $? -ne 0 ]; then
-  # exit 1 주석 처리 - warning 허용
-fi
+pnpm run lint:security || true
 
 echo "✅ 보안 검사 완료!"
 

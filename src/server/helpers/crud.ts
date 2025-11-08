@@ -21,7 +21,7 @@ export async function ensureOwnership(
   id: string,
   userId: string
 ) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const record = await (ctx.prisma[modelName] as any).findUnique({
     where: { id },
     select: { authorId: true, id: true },

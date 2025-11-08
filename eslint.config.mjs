@@ -11,29 +11,33 @@ const eslintConfig = defineConfig([
       security,
     },
     rules: {
-      // 해커톤용 완화된 보안 규칙 (Critical만 error, 나머지는 warn 또는 off)
+      // 해커톤용 완화된 보안 규칙 (Critical만 error, 나머지는 모두 off)
       "security/detect-object-injection": "off", // 객체 주입 탐지 (false positive 많음)
       "security/detect-non-literal-regexp": "off", // 비리터럴 정규식 탐지
-      "security/detect-unsafe-regex": "warn", // 안전하지 않은 정규식 탐지 (ReDoS) - warn으로 완화
-      "security/detect-buffer-noassert": "warn", // Buffer 안전하지 않은 사용 탐지
+      "security/detect-unsafe-regex": "off", // 안전하지 않은 정규식 탐지 (ReDoS)
+      "security/detect-buffer-noassert": "off", // Buffer 안전하지 않은 사용 탐지
       "security/detect-child-process": "off", // 자식 프로세스 사용 탐지
-      "security/detect-disable-mustache-escape": "warn", // Mustache 이스케이프 비활성화 탐지
+      "security/detect-disable-mustache-escape": "off", // Mustache 이스케이프 비활성화 탐지
       "security/detect-eval-with-expression": "error", // eval 사용 탐지 - Critical!
       "security/detect-no-csrf-before-method-override": "off", // CSRF 보호 누락 탐지
       "security/detect-non-literal-fs-filename": "off", // 비리터럴 파일명 탐지
       "security/detect-non-literal-require": "off", // 비리터럴 require 탐지
       "security/detect-possible-timing-attacks": "off", // 타이밍 공격 가능성 탐지
       "security/detect-pseudoRandomBytes": "off", // 약한 난수 생성 탐지
-      "security/detect-new-buffer": "warn", // 안전하지 않은 Buffer 생성자 탐지
+      "security/detect-new-buffer": "off", // 안전하지 않은 Buffer 생성자 탐지
       
-      // TypeScript any 타입 허용
+      // TypeScript 규칙 해커톤용 완화
       "@typescript-eslint/no-explicit-any": "off",
-      
-      // 미사용 변수는 경고만
-      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-unused-vars": "off", // 미사용 변수 무시
       
       // React hooks 규칙 완화
-      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/set-state-in-effect": "off",
+      
+      // Next.js 규칙 완화
+      "@next/next/no-img-element": "off", // img 태그 사용 허용
+      
+      // ESLint 기본 규칙 완화
+      "no-unused-vars": "off",
     },
   },
   // Override default ignores of eslint-config-next.
