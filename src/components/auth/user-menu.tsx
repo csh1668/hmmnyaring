@@ -7,6 +7,7 @@
 import { signOut } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface UserMenuProps {
   user: {
@@ -17,6 +18,7 @@ interface UserMenuProps {
 
 export function UserMenu({ user }: UserMenuProps) {
   const router = useRouter();
+  const t = useTranslations('common');
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
@@ -31,7 +33,7 @@ export function UserMenu({ user }: UserMenuProps) {
         <p className="text-muted-foreground">{user.email}</p>
       </div>
       <Button onClick={handleSignOut} variant="outline" size="sm">
-        로그아웃
+        {t('logout')}
       </Button>
     </div>
   );

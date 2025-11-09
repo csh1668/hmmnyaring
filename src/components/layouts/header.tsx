@@ -45,7 +45,7 @@ export async function Header() {
                 className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
               >
                 <MapPin className="h-4 w-4" />
-                <span>코스</span>
+                <span>{t('courses')}</span>
               </Link>
               <Link
                 href="/dashboard"
