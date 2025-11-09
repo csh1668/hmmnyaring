@@ -241,3 +241,4 @@ import { useRouter, usePathname } from '@/i18n/routing';
 - `getTranslations` 대신 `useTranslations` 사용 확인
 
 
+
